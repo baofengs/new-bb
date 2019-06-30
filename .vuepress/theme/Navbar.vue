@@ -1,72 +1,67 @@
 <template>
-  <header class="navbar">
-    <SidebarButton v-if="hasSidebar" @toggle-sidebar="$emit('toggle-sidebar')"/>
-    <router-link :to="$localePath" class="home-link">
-      <img class="logo"
-        v-if="$site.themeConfig.logo"
-        :src="$withBase($site.themeConfig.logo)">
-      <span class="site-name"
-        v-if="$siteTitle"
-        :class="{ 'can-hide': $site.themeConfig.logo }">
-        {{ $siteTitle }}
-      </span>
-    </router-link>
-    <div class="links">
-      <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia"/>
-      <SearchBox v-else-if="$site.themeConfig.search !== false"/>
-      <NavLinks class="can-hide"/>
-    </div>
-  </header>
+    <header class="navbar">
+        <router-link :to="$localePath" class="home-link">
+            <h1
+                class="site-name"
+                v-if="$siteTitle"
+            >{{ $siteTitle }}</h1>
+        </router-link>
+        <!-- <div class="links">
+            <AlgoliaSearchBox v-if="isAlgoliaSearch" :options="algolia" />
+            <SearchBox v-else-if="$site.themeConfig.search !== false" />
+        </div> -->
+    </header>
 </template>
 
 <script>
-import SidebarButton from './SidebarButton.vue'
-import AlgoliaSearchBox from '@AlgoliaSearchBox'
-import SearchBox from './SearchBox.vue'
-import NavLinks from './NavLinks.vue'
+import AlgoliaSearchBox from "@AlgoliaSearchBox";
+import SearchBox from "./SearchBox.vue";
 
 export default {
-  components: { SidebarButton, NavLinks, SearchBox, AlgoliaSearchBox },
-  props: ['hasSidebar'],
-  computed: {
-    algolia () {
-      return this.$themeLocaleConfig.algolia || this.$site.themeConfig.algolia || {}
-    },
-    isAlgoliaSearch () {
-      return this.algolia && this.algolia.apiKey && this.algolia.indexName
+    components: { SearchBox, AlgoliaSearchBox },
+    computed: {
+        algolia() {
+            return (
+                this.$themeLocaleConfig.algolia ||
+                this.$site.themeConfig.algolia ||
+                {}
+            );
+        },
+        isAlgoliaSearch() {
+            return (
+                this.algolia && this.algolia.apiKey && this.algolia.indexName
+            );
+        }
     }
-  }
-}
+};
 </script>
 
 <style lang="stylus">
-@import './styles/config.styl'
+@import './styles/config.styl';
+@import url('https://fonts.googleapis.com/css?family=Nothing+You+Could+Do&display=swap');
 
-.navbar
-  padding 0.7rem 1.5rem
-  line-height $navbarHeight - 1.4rem
-  position relative
-  a, span, img
-    display inline-block
-  .logo
-    height $navbarHeight - 1.4rem
-    min-width $navbarHeight - 1.4rem
-    margin-right 0.8rem
-    vertical-align top
-  .site-name
-    font-size 1.3rem
-    font-weight 600
-    color $textColor
-    position relative
-  .links
-    font-size 0.9rem
-    position absolute
-    right 1.5rem
-    top 0.7rem
+.navbar {
+    padding: 0.7rem 0;
+    line-height: $navbarHeight - 1.4rem;
+    position: relative;
+    > *:first-child { margin-top: 0 !important; }
+    border-bottom: 2px solid $textColor;
 
-@media (max-width: $MQMobile)
-  .navbar
-    padding-left 4rem
-    .can-hide
-      display none
+    a {
+        display: inline-block;
+        color: $textColor;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .site-name {
+        font-family: 'Nothing You Could Do', cursive;
+        font-size: 3rem;
+        font-weight: 600;
+        line-height: 1.5;
+        color: $textColor;
+        margin: 0;
+    }
+}
 </style>

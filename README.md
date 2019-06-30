@@ -1,5 +1,6 @@
-# hello vuepress
+---
+home: true
+about: https://arts.sanbaofengs.com/me
+---
 
-[命令行精进](./2019/terminal.md)
-
-[Shell 精进](./2019/shell.md)
+茫茫网海中能遇到你是我的缘分，停下你的匆匆的步伐，且听我来 BB 几句吧。

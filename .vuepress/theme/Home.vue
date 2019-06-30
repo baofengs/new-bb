@@ -1,134 +1,142 @@
 <template>
-  <div class="home">
-    <div class="hero">
-      <img v-if="data.heroImage" :src="$withBase(data.heroImage)" alt="hero">
-      <h1>{{ data.heroText || $title || 'Hello' }}</h1>
-      <p class="description">
-        {{ data.tagline || $description || 'Welcome to your VuePress site' }}
-      </p>
-      <p class="action" v-if="data.actionText && data.actionLink">
-        <NavLink class="action-button" :item="actionLink"/>
-      </p>
+    <div class="home">
+        <div class="home-body">
+            <section class="link" v-for="year in Object.keys(pages)" :key="year">
+                <div class="link-year">{{year}}</div>
+                <div class="link-body" v-for="page in pages[year]">
+                    <div class="link-body-createtime">{{page.date}}</div>
+                    <div class="link-body-title">
+                        <router-link class="nav-link" :to="page.path">{{ page.title }}</router-link>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="aboutme" v-if="data.about"><a :href="data.about">About Me</a></div>
+        <div class="footer" v-if="data.footer && !data.about">{{ data.footer }}</div>
     </div>
-    <div class="features" v-if="data.features && data.features.length">
-      <div class="feature" v-for="feature in data.features">
-        <h2>{{ feature.title }}</h2>
-        <p>{{ feature.details }}</p>
-      </div>
-    </div>
-    <Content custom/>
-    <div class="footer" v-if="data.footer">
-      {{ data.footer }}
-    </div>
-  </div>
 </template>
 
 <script>
-import NavLink from './NavLink.vue'
-
 export default {
-  components: { NavLink },
-  computed: {
-    data () {
-      return this.$page.frontmatter
+    computed: {
+        data() {
+            return this.$page.frontmatter;
+        },
+        pages () {
+            const pages = this.$site.pages.filter(page => page.path !== '/').map(page => {
+                if (!page.frontmatter.date) {
+                    page.frontmatter.date = new Date('1970');
+                }
+                return page;
+            }).sort((a, b) => {
+                return (+new Date(b.frontmatter.date)) - (+new Date(a.frontmatter.date))
+            });
+            return this.groupPagesByYear(pages);
+        }
     },
-    actionLink () {
-      return {
-        link: this.data.actionLink,
-        text: this.data.actionText
-      }
+    methods: {
+        groupPagesByYear (pages) {
+            return pages.reduce((formatedPages, page) => {
+                const date = page.frontmatter.date;
+                let [week, month, day, year] = new Date(date).toString().split(' ');
+                const yearStr = year + ' ';
+                const tmpPage = {
+                    title: page.title,
+                    path: page.path,
+                    date: this.formatDate({month, day})
+                }
+                if (formatedPages[yearStr]) {
+                    formatedPages[yearStr].push(tmpPage);
+                } else {
+                    formatedPages[yearStr] = [tmpPage];
+                }
+                return formatedPages;
+            }, {});
+        },
+        resolveYearFrom (path) {
+            const hasYear = path.match(/^\/(\d+)\//);
+            return hasYear ? hasYear[1] : '';
+        },
+        formatDate ({month, day}) {
+            return `${month} ${day}`;
+        }
     }
-  }
-}
+};
 </script>
 
 <style lang="stylus">
-@import './styles/config.styl'
+@import './styles/config.styl';
 
-.home
-  padding $navbarHeight 2rem 0
-  max-width 960px
-  margin 0px auto
-  .hero
-    text-align center
-    img
-      max-height 280px
-      display block
-      margin 3rem auto 1.5rem
-    h1
-      font-size 3rem
-    h1, .description, .action
-      margin 1.8rem auto
-    .description
-      max-width 35rem
-      font-size 1.6rem
-      line-height 1.3
-      color lighten($textColor, 40%)
-    .action-button
-      display inline-block
-      font-size 1.2rem
-      color #fff
-      background-color $accentColor
-      padding 0.8rem 1.6rem
-      border-radius 4px
-      transition background-color .1s ease
-      box-sizing border-box
-      border-bottom 1px solid darken($accentColor, 10%)
-      &:hover
-        background-color lighten($accentColor, 10%)
-  .features
-    border-top 1px solid $borderColor
-    padding 1.2rem 0
-    margin-top 2.5rem
-    display flex
-    flex-wrap wrap
-    align-items flex-start
-    align-content stretch
-    justify-content space-between
-  .feature
-    flex-grow 1
-    flex-basis 30%
-    max-width 30%
-    h2
-      font-size 1.4rem
-      font-weight 500
-      border-bottom none
-      padding-bottom 0
-      color lighten($textColor, 10%)
-    p
-      color lighten($textColor, 25%)
-  .footer
-    padding 2.5rem
-    border-top 1px solid $borderColor
-    text-align center
-    color lighten($textColor, 25%)
+.home {
+    padding: $navbarHeight 2rem 0;
+    max-width: 960px;
+    margin: 0px auto;
 
-@media (max-width: $MQMobile)
-  .home
-    .features
-      flex-direction column
-    .feature
-      max-width 100%
-      padding 0 2.5rem
+    &-body {
+        margin-top: 0 !important;
+        // min-height: 100vh;
+    }
 
-@media (max-width: $MQMobileNarrow)
-  .home
-    padding-left 1.5rem
-    padding-right 1.5rem
-    .hero
-      img
-        max-height 210px
-        margin 2rem auto 1.2rem
-      h1
-        font-size 2rem
-      h1, .description, .action
-        margin 1.2rem auto
-      .description
-        font-size 1.2rem
-      .action-button
-        font-size 1rem
-        padding 0.6rem 1.2rem
-    .feature
-      h2
-        font-size 1.25rem
+    .link{
+        &-year {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 1em 0;
+            user-select: none;
+            font-family: Georgia, serif;
+        }
+        &-body {
+            display: flex;
+            align-items: flex-start;
+            margin: 12px 0;
+            font-size: 1.4rem;
+            line-height: 2rem;
+            &-createtime {
+                user-select: none;
+                flex-basis: 70px;
+                min-width: 70px;
+                font-family: Georgia, serif;
+            }
+            &-title {
+                .nav-link {
+                    color: #212121;
+                    text-decoration: none;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        padding: 2.5rem;
+        border-top: 1px solid $borderColor;
+        text-align: center;
+        color: lighten($textColor, 25%);
+    }
+    .aboutme {
+        margin-top: 30px;
+        text-align: right;
+        a {
+            color: #212121;
+        }
+    }
+}
+
+@media (max-width: $MQMobile) {
+    // .home .aboutme {
+    //     text-align: left;
+    // }
+}
+
+@media (max-width: $MQMobileNarrow) {
+    .home {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        .aboutme {
+            text-align: left;
+        }
+    }
+}
 </style>
