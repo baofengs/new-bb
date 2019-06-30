@@ -1,14 +1,7 @@
 <template>
     <div class="theme-container no-sidebar">
         <Navbar />
-        <div class="custom-layout" v-if="$page.frontmatter.layout">
-            <component :is="$page.frontmatter.layout" />
-        </div>
-        <Home v-else-if="$page.frontmatter.home" />
-        <Page v-else :sidebar-items="sidebarItems">
-            <slot name="page-top" slot="top" />
-            <slot name="page-bottom" slot="bottom" />
-        </Page>
+        <component :is="layout" :sidebar-items="sidebarItems" />
     </div>
 </template>
 
@@ -22,7 +15,6 @@ import { resolveSidebarItems } from "./util";
 
 export default {
     components: { Home, Page, Navbar },
-
     computed: {
         sidebarItems() {
             return resolveSidebarItems(
@@ -31,6 +23,9 @@ export default {
                 this.$site,
                 this.$localePath
             );
+        },
+        layout() {
+            return this.$page.path === '/' ? Home : Page;
         }
     },
 

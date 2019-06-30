@@ -73,8 +73,10 @@ export default {
     margin: 0px auto;
 
     &-body {
+        $aboutmeHeight: 20px;
+        $footerHeight: 90px;
         margin-top: 0 !important;
-        // min-height: 100vh;
+        min-height: 361px;
     }
 
     .link{
