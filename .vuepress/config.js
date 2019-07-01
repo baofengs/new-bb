@@ -21,5 +21,13 @@ module.exports = {
         lastUpdated: 'Last Updated',
         logo: '/logo-40x40.png',
         lang: 'zh-CN',
-    }
+    },
+    plugins: [
+        [
+            '@vuepress/google-analytics',
+            {
+                'ga': 'UA-80885450-8'
+            }
+        ]
+    ]
 }

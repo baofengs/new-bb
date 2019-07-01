@@ -1,4 +1,9 @@
 **/.DS_Store
 .vuepress/dist
+
+
+node_modules/
+
+# vim
 *.swo
 *.swp

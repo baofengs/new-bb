@@ -1,0 +1,36 @@
+Arguments: 
+  /Users/bjhl/.nvm/versions/node/v8.10.0/bin/node /Users/bjhl/.nvm/versions/node/v8.10.0/bin/yarn init
+
+PATH: 
+  /usr/local/opt/coreutils/libexec/gnubin:/Users/bjhl/.bin:/usr/local/Cellar/python/3.6.5/Frameworks/Python.framework/Versions/3.6/bin:HOME/.composer/vendor/bin:vendor/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/bjhl/.nvm/versions/node/v8.10.0/bin:/Users/bjhl/.autojump/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/go/bin:/opt/X11/bin
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  8.10.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/Users/bjhl/.nvm/versions/node/v8.10.0/lib/node_modules/yarn/lib/cli.js:125657:13)
+      at emitNone (events.js:106:13)
+      at Interface.emit (events.js:208:7)
+      at Interface._ttyWrite (readline.js:775:16)
+      at ReadStream.onkeypress (readline.js:160:10)
+      at emitTwo (events.js:126:13)
+      at ReadStream.emit (events.js:214:7)
+      at emitKeys (internal/readline.js:420:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1011:36)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
