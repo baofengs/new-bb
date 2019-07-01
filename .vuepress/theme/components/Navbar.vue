@@ -76,12 +76,12 @@ function css(el, property) {
 @import url('https://fonts.googleapis.com/css?family=Nothing+You+Could+Do&display=swap');
 
 .navbar {
-    position: relative;
-    height: auto;
+    position: relative !important;
+    height: auto !important;
     max-width: $contentWidth;
     margin: auto;
     padding: 2rem 2.5rem;
-    border-bottom: 2px solid $textColor;
+    border-bottom: 2px solid $textColor !important;
 
     a {
         display: inline-block;
