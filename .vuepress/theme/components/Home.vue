@@ -53,10 +53,6 @@ export default {
                 return formatedPages;
             }, {});
         },
-        resolveYearFrom (path) {
-            const hasYear = path.match(/^\/(\d+)\//);
-            return hasYear ? hasYear[1] : '';
-        },
         formatDate ({month, day}) {
             return `${month} ${day}`;
         }
@@ -65,12 +61,13 @@ export default {
 </script>
 
 <style lang="stylus">
-@import './styles/config.styl';
+@import '../styles/config.styl';
 
 .home {
-    padding: $navbarHeight 2rem 0;
-    max-width: 960px;
-    margin: 0px auto;
+    margin: auto;
+    max-width $contentWidth
+    padding: 0 2.5rem;
+    box-sizing: border-box;
 
     &-body {
         $aboutmeHeight: 20px;
@@ -101,7 +98,7 @@ export default {
             }
             &-title {
                 .nav-link {
-                    color: #212121;
+                    color: $darkColor;
                     text-decoration: none;
                     &:hover {
                         text-decoration: underline;
@@ -121,15 +118,15 @@ export default {
         margin-top: 30px;
         text-align: right;
         a {
-            color: #212121;
+            color: $darkColor;
         }
     }
 }
 
 @media (max-width: $MQMobile) {
-    // .home .aboutme {
-    //     text-align: left;
-    // }
+    .home {
+        padding: 2rem;
+    }
 }
 
 @media (max-width: $MQMobileNarrow) {

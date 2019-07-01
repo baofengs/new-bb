@@ -1,12 +1,16 @@
 {
-  "name": "new-bb",
-  "version": "1.0.0",
-  "description": "new bb time",
-  "main": "index.js",
-  "repository": "git@github.com:x-bao/new-bb.git",
-  "author": "SanBaofeng <sanbaofeng@foxmail.com>",
-  "license": "MIT",
-  "devDependencies": {
-    "@vuepress/plugin-google-analytics": "^1.0.0-rc.1"
-  }
+    "name": "new-bb",
+    "version": "1.0.0",
+    "description": "new bb",
+    "main": "index.js",
+    "repository": "git@github.com:x-bao/new-bb.git",
+    "author": "San Baofeng <sanbaofeng@foxmail.com>",
+    "license": "MIT",
+    "devDependencies": {
+        "@vuepress/plugin-back-to-top": "^1.0.0-rc.1",
+        "@vuepress/plugin-google-analytics": "^1.0.0-rc.1"
+    },
+    "dependencies": {
+        "vuepress": "^1.0.2"
+    }
 }
