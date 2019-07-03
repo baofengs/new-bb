@@ -3092,6 +3092,15 @@ fs-extra@^7.0.1:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
+fs-extra@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
+  integrity sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs-minipass@^1.2.5:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/fs-minipass/-/fs-minipass-1.2.6.tgz#2c5cc30ded81282bfe8a0d7c7c1853ddeb102c07"
@@ -3259,7 +3268,7 @@ good-listener@^1.2.2:
   dependencies:
     delegate "^3.1.2"
 
-graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
+graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.0.tgz#8d8fdc73977cb04104721cb53666c1ca64cd328b"
   integrity sha512-jpSvDPV4Cq/bgtpndIWbI5hmYxhQGHPC4d4cqBPb4DLniCfhJokdXhwhaDuLBGLQdvvRum/UiX6ECVIPvDXqdg==
@@ -6989,6 +6998,14 @@ vuepress-plugin-container@^2.0.0:
   integrity sha512-SMlWJl0uZYkqAxD2RUZmIrANZWKgiZdM64K7WmdyHyQPYI+NUj3ugi5D+zDn62BoO9NfQTiskEIa2u619SRweA==
   dependencies:
     markdown-it-container "^2.0.0"
+
+vuepress-plugin-new@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-new/-/vuepress-plugin-new-0.1.3.tgz#5a1c4118de4348408c6e13d9f4f19a89f4d3837a"
+  integrity sha512-RJifXLHeh+TbCbF7l1e8FpJJk02YmDuqn9gdCf2nD6wW8Z4OvzJ+yn9AoJ2TNVmu87FmrRTLZXCKMiUUHj3m7A==
+  dependencies:
+    "@vuepress/shared-utils" "^1.0.2"
+    fs-extra "^8.1.0"
 
 vuepress@^1.0.2:
   version "1.0.2"

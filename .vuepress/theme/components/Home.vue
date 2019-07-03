@@ -23,7 +23,7 @@ export default {
             return this.$page.frontmatter;
         },
         pages () {
-            const pages = this.$site.pages.filter(page => page.path !== '/').map(page => {
+            const pages = this.$site.pages.filter(page => (page.path !== '/' && !page.frontmatter.draft)).map(page => {
                 if (!page.frontmatter.date) {
                     page.frontmatter.date = new Date('1970');
                 }
