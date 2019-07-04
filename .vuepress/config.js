@@ -4,8 +4,9 @@ module.exports = {
     extend: '@vuepress/theme-default',
     base: '/',
     evergreen: true,
+    theme: 'vuepress-theme-bb',
     head: [
-        ['link', { rel: 'icon', href: '/logo-40x40.png' }]
+        ['link', { rel: 'icon', href: '/logo.png' }]
     ],
     markdown: {
         lineNumbers: false
@@ -13,9 +14,9 @@ module.exports = {
     themeConfig: {
         navbar: true,
         search: false,
-        lastUpdated: 'Last Updated',
-        logo: '/logo-40x40.png',
+        logo: '/logo.png',
         lang: 'zh-CN',
+        lastUpdated: 'Updated'
     },
     plugins: [
         ['@vuepress/back-to-top'],
@@ -25,6 +26,16 @@ module.exports = {
                 'ga': 'UA-80885450-8'
             }
         ],
-        ['vuepress-plugin-new']
+        ['vuepress-plugin-new'],
+        [
+            '@vuepress/last-updated',
+            {
+                transformer: (timestamp, lang) => {
+                    const moment = require('moment');
+                    moment.locale(lang);
+                    return moment(timestamp).format('YYYY-MM-DD HH:mm');
+                }
+            }
+        ]
     ],
 }
